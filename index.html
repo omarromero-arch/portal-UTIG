@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTIG | Portal Institucional</title>
+<style>
+:root{--p:#54269a;--p2:#7b35c5;--m:#d52ab4;--v:#9b66d8;--gold:#d7b46a;--bg:#fff;--ink:#30235b;--soft:#f7f3fc;--line:#e7def4}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+button,input{font:inherit}.top{height:82px;display:flex;align-items:center;gap:25px;padding:0 5%;border-bottom:1px solid #eee;background:white}
+.logo{font-weight:900;font-size:29px;color:var(--p);display:flex;align-items:center;gap:10px}.logo span{font-size:12px;font-weight:600;border-left:1px solid #ccc;padding-left:12px;line-height:1.25}
+.search{margin-left:auto;display:flex;border:1px solid #cfc4df;border-radius:10px;overflow:hidden;width:min(390px,40vw)}.search input{border:0;outline:0;padding:12px 14px;flex:1}.search button{border:0;background:white;padding:0 15px;color:var(--p);cursor:pointer}
+.topbtn{border:0;background:white;color:var(--p);font-weight:700;cursor:pointer}.nav{background:linear-gradient(90deg,var(--p),var(--m));color:white;display:flex;justify-content:center;gap:4px;padding:0 4%;position:sticky;top:0;z-index:10}.nav button{border:0;background:transparent;color:white;padding:16px 20px;cursor:pointer;font-weight:700}.nav button:hover,.nav .active{background:#ffffff22}
+main{max-width:1180px;margin:auto;padding:18px 22px 40px}.hero{min-height:245px;border-radius:14px;padding:35px 42px;display:flex;align-items:center;overflow:hidden;color:white;background:linear-gradient(115deg,#482184,#7224a7 60%,#c62cae);position:relative}.hero:after{content:"";position:absolute;right:-80px;bottom:-120px;width:520px;height:330px;background:radial-gradient(ellipse,#d87bd1 0 35%,transparent 36%),radial-gradient(ellipse at 50% 50%,#7e45bd 0 38%,transparent 39%);opacity:.55}.hero h1{font-size:32px;max-width:570px;margin:0 0 12px}.hero h1 b{color:#f28be4}.hero p{max-width:550px;line-height:1.5}.cta{border:0;border-radius:22px;background:var(--m);color:white;padding:11px 20px;font-weight:800;cursor:pointer}
+.quick{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:18px 5px;margin:16px 0;background:white;border:1px solid var(--line);border-radius:12px}.quick button{border:0;background:white;cursor:pointer;color:var(--ink);font-weight:700}.ico{width:62px;height:62px;border-radius:50%;margin:auto auto 8px;display:grid;place-items:center;color:white;font-size:25px;background:linear-gradient(145deg,var(--p),var(--m));box-shadow:0 5px 14px #5a279a2b}.quick small{display:block;font-weight:400;margin-top:5px;color:#665b7e}
+.layout{display:grid;grid-template-columns:1fr 310px;gap:20px}.title{display:flex;justify-content:space-between;align-items:center}.title h2{margin:10px 0;color:var(--ink)}.feed{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:white;box-shadow:0 4px 15px #4320700b}.card .pic{height:130px;background:linear-gradient(135deg,#efe3ff,#d9b8ef);display:grid;place-items:center;font-size:46px}.card .body{padding:15px}.tag{display:inline-block;background:var(--p);color:white;border-radius:15px;padding:5px 9px;font-size:11px;font-weight:800}.card h3{font-size:17px;margin:10px 0 7px}.card p{font-size:13px;line-height:1.45;color:#625878}.meta{font-size:11px;color:#756a8a}.actions{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:12px;color:var(--p);font-weight:700}
+.side{position:sticky;top:70px;height:max-content}.panel{border:1px solid var(--line);border-radius:11px;padding:15px;margin-bottom:15px;background:white}.panel h3{margin:0 0 10px}.side a{display:block;text-decoration:none;color:var(--ink);padding:10px;border-radius:7px;background:#f5effc;margin:6px 0;font-size:13px;cursor:pointer}.side a:hover{background:#eadcf9}.notice{font-size:12px;padding:8px 0;border-bottom:1px solid var(--line)}.notice:last-child{border:0}.strip{margin-top:16px;background:linear-gradient(90deg,#eee1ff,#f7e7f6);padding:20px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+footer{background:#31206e;color:white;padding:25px 6%;display:flex;justify-content:space-between;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#24143a88;z-index:30;place-items:center;padding:20px}.modal.show{display:grid}.modalbox{background:white;border-radius:15px;max-width:560px;width:100%;padding:25px;box-shadow:0 20px 70px #0004}.close{float:right;border:0;background:#eee;border-radius:50%;width:32px;height:32px;cursor:pointer}
+.toast{position:fixed;right:20px;bottom:20px;background:#33206e;color:white;padding:13px 18px;border-radius:10px;display:none;z-index:50}
+@media(max-width:850px){.quick{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.side{position:static}.feed{grid-template-columns:1fr}.nav{overflow:auto;justify-content:flex-start}.nav button{white-space:nowrap}.top{padding:0 15px}.top .search{width:45%}.topbtn{display:none}}
+@media(max-width:520px){.hero{padding:25px;min-height:290px}.hero h1{font-size:26px}.quick{grid-template-columns:repeat(2,1fr)}.search{display:none!important}footer{display:block}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">UTIG <span>Unidad Técnica para<br>la Igualdad de Género</span></div>
+  <div class="search"><input id="search" placeholder="Buscar en el sitio..."><button onclick="buscar()">⌕</button></div>
+  <button class="topbtn" onclick="openModal('Novedades','Aquí se mostrarían las novedades presupuestales y normativas.')">🔔 Notificaciones</button>
+  <button class="topbtn" onclick="openModal('Administración','Área destinada al personal autorizado.')">♙ Administración</button>
+</header>
+<nav class="nav">
+<button class="active">⌂ Inicio</button><button>Nosotros</button><button>Igualdad de Género</button><button>Transparencia</button><button>Trámites y Servicios</button><button>Capacitación</button><button>Noticias</button><button>Contacto</button>
+</nav>
+
+<main>
+<section class="hero">
+  <div><h1>Juntas construimos espacios laborales libres de <b>violencia y discriminación</b></h1>
+  <p>La UTIG impulsa la igualdad de género, la inclusión y el respeto a los derechos humanos.</p>
+  <button class="cta" onclick="openModal('Conoce la UTIG','Este espacio puede presentar la misión, objetivos y funciones de la Unidad Técnica para la Igualdad de Género.')">Conoce más →</button></div>
+</section>
+
+<section class="quick">
+  <button onclick="openModal('Eventos','Consulta el calendario de eventos.')"><div class="ico">▣</div>Eventos<small>Consulta el calendario</small></button>
+  <button onclick="openModal('Convocatorias','Consulta las oportunidades abiertas.')"><div class="ico">▤</div>Convocatorias<small>Oportunidades abiertas</small></button>
+  <button onclick="openModal('Capacitación','Cursos y talleres disponibles.')"><div class="ico">◇</div>Capacitación<small>Cursos y talleres</small></button>
+  <button onclick="openModal('Guías metodológicas','Recursos y materiales de apoyo.')"><div class="ico">▥</div>Guías metodológicas<small>Recursos útiles</small></button>
+  <button onclick="openModal('Denuncias','Acceso al módulo de quejas y denuncias.')"><div class="ico">✓</div>Denuncias<small>Reporta aquí</small></button>
+  <button onclick="openModal('Solicitud de información','Acceso al módulo de solicitudes de información pública.')"><div class="ico">⌕</div>Solicitud de información<small>Transparencia</small></button>
+</section>
+
+<div class="layout">
+<section>
+  <div class="title"><h2>▣ Publicaciones recientes</h2><button class="topbtn" onclick="toast('Mostrando todas las publicaciones')">Ver todas →</button></div>
+  <div class="feed" id="feed">
+    <article class="card" data-text="igualdad de género taller lenguaje incluyente no sexista">
+      <div class="pic">📖</div><div class="body"><span class="tag">Igualdad de Género</span><div class="meta">12 sep 2025</div><h3>Taller: Lenguaje incluyente y no sexista</h3><p>Participa en el taller para fortalecer una comunicación con perspectiva de género.</p><div class="actions"><span>♡ 34 &nbsp; 💬 12</span><a onclick="openModal('Taller: Lenguaje incluyente','Aquí puede mostrarse el contenido ampliado de la publicación.')">Leer más →</a></div></div>
+    </article>
+    <article class="card" data-text="transparencia solicitud información pública">
+      <div class="pic">💻</div><div class="body"><span class="tag">Transparencia</span><div class="meta">10 sep 2025</div><h3>¿Cómo tramitar una solicitud de información pública?</h3><p>Conoce el paso a paso para realizar tu solicitud de información pública.</p><div class="actions"><span>♡ 28 &nbsp; 💬 8</span><a onclick="openModal('Solicitud de información','Aquí puede mostrarse una guía interactiva paso a paso.')">Leer más →</a></div></div>
+    </article>
+    <article class="card" data-text="capacitación igualdad laboral no discriminación">
+      <div class="pic">👥</div><div class="body"><span class="tag">Capacitación</span><div class="meta">5 sep 2025</div><h3>Curso: Igualdad laboral y no discriminación</h3><p>Fortalece tus conocimientos para contribuir a entornos laborales justos e inclusivos.</p><div class="actions"><span>♡ 42 &nbsp; 💬 16</span><a onclick="openModal('Curso','Información del curso, fechas, registro y materiales.')">Leer más →</a></div></div>
+    </article>
+    <article class="card" data-text="eventos igualdad mujer">
+      <div class="pic">🎤</div><div class="body"><span class="tag">Eventos</span><div class="meta">2 sep 2025</div><h3>Conmemoración del Día Internacional de la Mujer</h3><p>Consulta contenidos, actividades y materiales relacionados con igualdad de género.</p><div class="actions"><span>♡ 36 &nbsp; 💬 10</span><a onclick="openModal('Evento','Aquí puede integrarse la transmisión o información del evento.')">Leer más →</a></div></div>
+    </article>
+  </div>
+  <div class="strip"><strong>📣 La igualdad de género es tarea de todas y todos</strong><button class="cta" onclick="toast('Explorando recursos')">Explora</button></div>
+</section>
+
+<aside class="side">
+ <div class="panel"><h3>★ Accesos prioritarios</h3>
+  <a onclick="openModal('Solicitudes de información pública','Módulo de solicitud de información.')">Solicitudes de información pública ›</a>
+  <a onclick="openModal('Denuncias','Módulo de denuncias y quejas.')">Denuncias ›</a>
+  <a onclick="openModal('Portal de transparencia','Repositorio oficial de transparencia.')">Portal de transparencia ›</a>
+  <a onclick="openModal('Normatividad','Consulta de normativa aplicable.')">Normatividad ›</a>
+  <a onclick="openModal('Trámites y servicios','Acceso a trámites prioritarios.')">Trámites y servicios ›</a>
+ </div>
+ <div class="panel"><h3>🔔 Novedades <small style="float:right">Ver todas</small></h3>
+  <div class="notice">Se publica nuevo protocolo de atención.</div><div class="notice">Convocatorias y capacitaciones disponibles.</div><div class="notice">Actualizaciones normativas.</div>
+ </div>
+ <div class="panel" style="background:linear-gradient(135deg,#a528b8,#51208d);color:white"><h2 style="margin:0">UTIG</h2><small>Diversidad · Inclusión · Igualdad</small></div>
+</aside>
+</div>
+</main>
+
+<footer><strong>UTIG · Unidad Técnica para la Igualdad de Género</strong><span>Aviso de privacidad · Accesibilidad · Términos y condiciones</span><span>Contacto institucional</span></footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="modalbox"><button class="close" onclick="closeModal()">×</button><h2 id="mtitle"></h2><p id="mbody"></p><button class="cta" onclick="closeModal()">Cerrar</button></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+function openModal(t,b){document.getElementById('mtitle').textContent=t;document.getElementById('mbody').textContent=b;document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function toast(t){let e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2200)}
+function buscar(){let q=document.getElementById('search').value.toLowerCase().trim();document.querySelectorAll('.card').forEach(c=>c.style.display=(!q||c.dataset.text.includes(q))?'block':'none');if(q)toast('Resultados filtrados para: '+q)}
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')buscar()})
+</script>
+</body>
+</html>
